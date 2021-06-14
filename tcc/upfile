@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#info
+verson="0.9.27"
+dependencies=("make" "texi2html")
+
+#functions
+build()
+{
+	tar xvf tcc-0.9.27.tar.bz2
+	cd tcc-0.9.27
+
+	./configure
+	make
+	make test
+}
+
+install()
+{
+	#preferred privilage escalation utility, sudo, doas, etc.
+	root=$1
+	
+	$root make install
+}
+
+uninstall()
+{
+	#preferred privilage escalation utility, sudo, doas, etc.
+	root=$1
+	$root make uninstall
+}
+
+#build $1
