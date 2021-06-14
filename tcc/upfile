@@ -27,6 +27,8 @@ uninstall()
 {
 	#preferred privilage escalation utility, sudo, doas, etc.
 	root=$1
+
+	cd tcc-0.9.27
 	$root make uninstall
 }
 
