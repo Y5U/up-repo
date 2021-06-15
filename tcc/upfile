@@ -2,13 +2,15 @@
 
 #info
 version="0.9.27"
-dependencies=("make" "texi2html")
+dependencies=("make" "texi2html" "wget" "tar" "wget")
 
 #functions
 build()
 {
-	tar xvf tcc-0.9.27.tar.bz2
-	cd tcc-0.9.27
+	rm -rf tcc
+	wget "https://download.savannah.nongnu.org/releases/tinycc/tcc-0.9.27.tar.bz2"
+	tar xvf "tcc-$version.tar.bz2"
+	cd "tcc-$version"
 
 	./configure
 	make
@@ -20,6 +22,7 @@ install()
 	#preferred privilage escalation utility, sudo, doas, etc.
 	root=$1
 	
+	cd "tcc-$version"
 	$root make install
 }
 
@@ -28,8 +31,10 @@ uninstall()
 	#preferred privilage escalation utility, sudo, doas, etc.
 	root=$1
 
-	cd tcc-0.9.27
+	cd "tcc-$version"
 	$root make uninstall
+	cd ..
+	rm -rf tcc*
 }
 
 #build $1
